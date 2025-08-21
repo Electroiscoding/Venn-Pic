@@ -776,5 +776,347 @@
                             </div>
                         </div>
 
+                            <div class="shape-btn" data-shape="star">
+                                <i class="fas fa-star"></i> Star
+                            </div>
+                            <div class="shape-btn" data-shape="hexagon">
+                                <i class="fas fa-hexagon"></i> Hexagon
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Enhanced Background Controls -->
+                <div class="card">
+                    <div class="card-title">
+                        <i class="fas fa-fill-drip"></i>
+                        Background & Effects
+                    </div>
+                    
+                    <div class="control-group">
+                        <div class="control-label">Background Style</div>
+                        <div class="bg-options">
+                            <div class="bg-option bg-transparent selected" data-bg="transparent"></div>
+                            <div class="bg-option bg-sunset" data-bg="sunset"></div>
+                            <div class="bg-option bg-ocean" data-bg="ocean"></div>
+                            <div class="bg-option bg-forest" data-bg="forest"></div>
+                            <div class="bg-option bg-mountain" data-bg="mountain"></div>
+                            <div class="bg-option bg-galaxy" data-bg="galaxy"></div>
+                            <div class="bg-option bg-cherry" data-bg="cherry"></div>
+                            <div class="bg-option bg-aurora" data-bg="aurora"></div>
+                            <div class="bg-option bg-fire" data-bg="fire"></div>
+                        </div>
+                    </div>
+
+                    <!-- Background Color Picker -->
+                    <div class="control-group mt-4">
+                        <div class="control-label">Custom Background Color</div>
+                        <input type="color" id="bgColorPicker" class="w-full h-10 rounded-lg cursor-pointer">
+                    </div>
+
+                    <!-- Background Image Upload -->
+                    <div class="control-group mt-4">
+                        <div class="control-label">Custom Background Image</div>
+                        <div class="upload-box" onclick="document.getElementById('bgImageUpload').click()">
+                            <div class="upload-text"><i class="fas fa-image"></i> Upload Background</div>
+                            <input type="file" id="bgImageUpload" accept="image/*" class="hidden">
+                        </div>
+                    </div>
+
+                    <!-- Background Blur Control -->
+                    <div class="control-group mt-4">
+                        <div class="control-label">
+                            Background Blur
+                            <span class="control-value" id="bgBlurValue">0px</span>
+                        </div>
+                        <input type="range" id="bgBlur" min="0" max="20" value="0">
+                    </div>
+                </div>
+
+                <!-- Enhanced Effects Controls -->
+                <div class="card">
+                    <div class="card-title">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                        Advanced Effects
+                    </div>
+
+                    <!-- Blend Mode Controls -->
+                    <div class="control-group">
+                        <div class="control-label">Blend Mode</div>
+                        <select id="blendMode" class="effect-select">
+                            <option value="normal">Normal</option>
+                            <option value="multiply">Multiply</option>
+                            <option value="screen">Screen</option>
+                            <option value="overlay">Overlay</option>
+                            <option value="darken">Darken</option>
+                            <option value="lighten">Lighten</option>
+                            <option value="color-dodge">Color Dodge</option>
+                            <option value="color-burn">Color Burn</option>
+                            <option value="hard-light">Hard Light</option>
+                            <option value="soft-light">Soft Light</option>
+                            <option value="difference">Difference</option>
+                            <option value="exclusion">Exclusion</option>
+                        </select>
+                    </div>
+
+                    <!-- Shadow Controls -->
+                    <div class="control-group mt-4">
+                        <div class="control-label">
+                            Shadow Intensity
+                            <span class="control-value" id="shadowValue">0px</span>
+                        </div>
+                        <input type="range" id="shadowIntensity" min="0" max="50" value="0">
+                    </div>
+
+                    <!-- Border Controls -->
+                    <div class="control-group mt-4">
+                        <div class="control-label">
+                            Border Width
+                            <span class="control-value" id="borderValue">0px</span>
+                        </div>
+                        <input type="range" id="borderWidth" min="0" max="20" value="0">
+                        <input type="color" id="borderColor" class="mt-2 w-full h-10 rounded-lg cursor-pointer">
+                    </div>
+
+                    <!-- Filter Controls -->
+                    <div class="control-group mt-4">
+                        <div class="control-label">
+                            Brightness
+                            <span class="control-value" id="brightnessValue">100%</span>
+                        </div>
+                        <input type="range" id="brightness" min="0" max="200" value="100">
+                    </div>
+
+                    <div class="control-group mt-4">
+                        <div class="control-label">
+                            Contrast
+                            <span class="control-value" id="contrastValue">100%</span>
+                        </div>
+                        <input type="range" id="contrast" min="0" max="200" value="100">
+                    </div>
+
+                    <div class="control-group mt-4">
+                        <div class="control-label">
+                            Saturation
+                            <span class="control-value" id="saturationValue">100%</span>
+                        </div>
+                        <input type="range" id="saturation" min="0" max="200" value="100">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canvas Section -->
+            <div class="canvas-container">
+                <canvas id="canvas"></canvas>
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="downloadBtn">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                    <button class="btn btn-secondary" id="shareBtn">
+                        <i class="fas fa-share-alt"></i> Share
+                    </button>
+                    <button class="btn btn-outline" id="resetBtn">
+                        <i class="fas fa-undo"></i> Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add necessary JavaScript libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix"></script>
+
+    <script>
+        // Initialize fabric.js canvas
+        const canvas = new fabric.Canvas('canvas', {
+            width: 800,
+            height: 600,
+            backgroundColor: 'transparent'
+        });
+
+        // Initialize variables
+        let image1, image2;
+        let bodyPixNet;
+
+        // Load BodyPix model for background removal
+        async function loadBodyPixModel() {
+            bodyPixNet = await bodyPix.load({
+                architecture: 'MobileNetV1',
+                outputStride: 16,
+                multiplier: 0.75,
+                quantBytes: 2
+            });
+        }
+        loadBodyPixModel();
+
+        // Function to remove background using BodyPix
+        async function removeBackground(imageElement) {
+            const segmentation = await bodyPixNet.segmentPerson(imageElement);
+            const canvas = document.createElement('canvas');
+            canvas.width = imageElement.width;
+            canvas.height = imageElement.height;
+            const ctx = canvas.getContext('2d');
+            
+            // Draw original image
+            ctx.drawImage(imageElement, 0, 0);
+            
+            // Get image data
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const pixels = imageData.data;
+            
+            // Apply segmentation mask
+            for (let i = 0; i < pixels.length; i += 4) {
+                if (!segmentation.data[i/4]) {
+                    pixels[i + 3] = 0; // Set alpha to 0 for background
+                }
+            }
+            
+            ctx.putImageData(imageData, 0, 0);
+            return canvas.toDataURL();
+        }
+
+        // Handle file uploads
+        document.getElementById('file1').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = async (event) => {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = async () => {
+                        if (document.getElementById('removeBg1').checked) {
+                            const processedImageUrl = await removeBackground(img);
+                            addImageToCanvas(processedImageUrl, 'image1');
+                        } else {
+                            addImageToCanvas(event.target.result, 'image1');
+                        }
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Similar event listener for file2...
+
+        // Function to add image to canvas
+        function addImageToCanvas(url, imageId) {
+            fabric.Image.fromURL(url, (img) => {
+                // Remove existing image if any
+                if (imageId === 'image1' && image1) {
+                    canvas.remove(image1);
+                } else if (imageId === 'image2' && image2) {
+                    canvas.remove(image2);
+                }
+
+                // Set image properties
+                img.scale(0.5).set({
+                    left: 100,
+                    top: 100,
+                    cornerColor: 'white',
+                    cornerStrokeColor: '#00f2fe',
+                    cornerStyle: 'circle',
+                    transparentCorners: false,
+                    borderColor: '#00f2fe',
+                    borderScaleFactor: 2,
+                });
+
+                // Store reference
+                if (imageId === 'image1') {
+                    image1 = img;
+                } else {
+                    image2 = img;
+                }
+
+                canvas.add(img);
+                canvas.renderAll();
+            });
+        }
+
+        // Handle all range input changes
+        document.querySelectorAll('input[type="range"]').forEach(input => {
+            input.addEventListener('input', (e) => {
+                const value = e.target.value;
+                document.getElementById(`${e.target.id}Value`).textContent = 
+                    `${value}${e.target.id.includes('opacity') ? '%' : 'px'}`;
+                
+                updateCanvasEffects();
+            });
+        });
+
+        // Update canvas effects based on controls
+        function updateCanvasEffects() {
+            if (image1) {
+                image1.set({
+                    opacity: document.getElementById('opacity1').value / 100,
+                    angle: document.getElementById('rotation1').value,
+                    scaleX: document.getElementById('size1').value / 100,
+                    scaleY: document.getElementById('size1').value / 100,
+                });
+            }
+
+            if (image2) {
+                image2.set({
+                    opacity: document.getElementById('opacity2').value / 100,
+                    angle: document.getElementById('rotation2').value,
+                    scaleX: document.getElementById('size2').value / 100,
+                    scaleY: document.getElementById('size2').value / 100,
+                });
+            }
+
+            // Apply canvas background effects
+            canvas.set({
+                backgroundColor: document.getElementById('bgColorPicker').value,
+                backgroundImage: document.getElementById('bgImageUpload').files[0] ? 
+                    URL.createObjectURL(document.getElementById('bgImageUpload').files[0]) : null
+            });
+
+            canvas.renderAll();
+        }
+
+        // Handle downloads
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            const dataUrl = canvas.toDataURL({
+                format: 'png',
+                quality: 1
+            });
+            const link = document.createElement('a');
+            link.download = 'composition.png';
+            link.href = dataUrl;
+            link.click();
+        });
+
+        // Handle sharing
+        document.getElementById('shareBtn').addEventListener('click', async () => {
+            try {
+                const blob = await new Promise(resolve => canvas.toBlob(resolve));
+                const file = new File([blob], 'composition.png', { type: 'image/png' });
+                const shareData = {
+                    files: [file],
+                    title: 'Photo Composition',
+                    text: 'Check out my photo composition!'
+                };
+                if (navigator.canShare && navigator.canShare(shareData)) {
+                    await navigator.share(shareData);
+                }
+            } catch (err) {
+                console.error('Error sharing:', err);
+            }
+        });
+
+        // Handle reset
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            canvas.clear();
+            canvas.backgroundColor = 'transparent';
+            document.querySelectorAll('input[type="range"]').forEach(input => {
+                input.value = input.defaultValue;
+                document.getElementById(`${input.id}Value`).textContent = 
+                    `${input.defaultValue}${input.id.includes('opacity') ? '%' : 'px'}`;
+            });
+        });
+    </script>
+</body>
+</html>
 
